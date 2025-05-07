@@ -1,15 +1,13 @@
 import { Elysia, t } from 'elysia';
 import bcrypt from 'bcrypt';
-import { jwt } from '@elysiajs/jwt';
+import jwt from 'jsonwebtoken';
 // Mock kullanıcı veritabanı
 const users = [];
 let nextId = 1;
+// JWT secret ve token süresi
+const JWT_SECRET = 'gizli-anahtar-burada-olmalı'; // Bu değeri güvenli bir ortam değişkeni ile değiştirin
+const TOKEN_EXPIRY = '7d'; // Token süresi 7 gün
 export const authController = new Elysia({ prefix: '/auth' })
-    .use(jwt({
-    name: 'jwt',
-    secret: 'gizli-anahtar-burada-olmalı', // Bu değeri güvenli bir ortam değişkeni ile değiştirin
-    exp: '7d' // Token süresi 7 gün
-}))
     .post('/register', async ({ body }) => {
     const { email, password } = body;
     // Email kontrolü
@@ -44,7 +42,7 @@ export const authController = new Elysia({ prefix: '/auth' })
         password: t.String()
     })
 })
-    .post('/login', async ({ body, jwt }) => {
+    .post('/login', async ({ body }) => {
     const { email, password } = body;
     // Kullanıcıyı bul
     const user = users.find(user => user.email === email);
@@ -63,9 +61,7 @@ export const authController = new Elysia({ prefix: '/auth' })
         };
     }
     // JWT token oluştur
-    const token = await jwt.sign({
-        userId: user.id
-    });
+    const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: TOKEN_EXPIRY });
     return {
         status: 'success',
         token
@@ -76,7 +72,7 @@ export const authController = new Elysia({ prefix: '/auth' })
         password: t.String()
     })
 })
-    .get('/me', async ({ headers, jwt }) => {
+    .get('/me', async ({ headers }) => {
     // Authorization header'ını kontrol et
     const authHeader = headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -87,29 +83,37 @@ export const authController = new Elysia({ prefix: '/auth' })
     }
     // Token'ı al
     const token = authHeader.split(' ')[1];
-    // Token'ı doğrula
-    const payload = await jwt.verify(token);
-    if (!payload || !payload.userId) {
+    try {
+        // Token'ı doğrula
+        const payload = jwt.verify(token, JWT_SECRET);
+        if (!payload || !payload.userId) {
+            return {
+                status: 'error',
+                message: 'Geçersiz token'
+            };
+        }
+        // Kullanıcıyı bul
+        const user = users.find(user => user.id === payload.userId);
+        if (!user) {
+            return {
+                status: 'error',
+                message: 'Kullanıcı bulunamadı'
+            };
+        }
+        // Kullanıcı bilgilerini dön (şifre hariç)
+        return {
+            status: 'success',
+            user: {
+                id: user.id,
+                email: user.email,
+                createdAt: user.createdAt
+            }
+        };
+    }
+    catch (error) {
         return {
             status: 'error',
             message: 'Geçersiz token'
         };
     }
-    // Kullanıcıyı bul
-    const user = users.find(user => user.id === payload.userId);
-    if (!user) {
-        return {
-            status: 'error',
-            message: 'Kullanıcı bulunamadı'
-        };
-    }
-    // Kullanıcı bilgilerini dön (şifre hariç)
-    return {
-        status: 'success',
-        user: {
-            id: user.id,
-            email: user.email,
-            createdAt: user.createdAt
-        }
-    };
 });

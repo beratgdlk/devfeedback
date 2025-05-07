@@ -1,6 +1,6 @@
 import { Elysia } from 'elysia';
 import { createServer } from 'node:http';
-import { authController } from './auth.controller.js';
+import { authController } from './controllers/auth.controller.js';
 const app = new Elysia()
     .use(authController)
     .get('/', () => 'Merhaba Dünya!');
