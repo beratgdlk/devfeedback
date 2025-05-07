@@ -1,0 +1,655 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Light Mode Theme - Hidden By Default */
+.light {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+/* Dark Mode Theme - Applied By Default */
+:root {
+  --radius: 0.625rem;
+  --background: oklch(0.1 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.15 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.15 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.6 0.243 264.376); /* Mor-mavi */
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.2 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.2 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.2 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(0.2 0 0);
+  --input: oklch(0.2 0 0);
+  --ring: oklch(0.6 0.243 264.376);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.15 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.6 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.2 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.2 0 0);
+  --sidebar-ring: oklch(0.6 0.243 264.376);
+  
+  /* Retro renkler */
+  --retro-neon-pink: #9900FF; /* Siber mor tonu */
+  --retro-neon-blue: #00ffff;
+  --retro-neon-green: #00ff00;
+  --retro-purple: #7700cc;
+  --retro-orange: #ff9900;
+  --retro-cyan: #00C8FF;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Özel Tema Geçişleri */
+html {
+  color-scheme: dark;
+}
+
+/* Özel Animasyonlar */
+.animate-pulse-slow {
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Marquee animasyonu */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+/* Yeni Retro Animasyonlar */
+.retro-text {
+  text-shadow: 
+    0 0 5px var(--retro-neon-blue),
+    0 0 10px var(--retro-neon-blue),
+    0 0 15px var(--retro-neon-blue);
+  animation: textGlow 1.5s infinite alternate;
+}
+
+.retro-text-pink {
+  text-shadow: 
+    0 0 5px var(--retro-neon-pink),
+    0 0 10px var(--retro-neon-pink),
+    0 0 15px var(--retro-neon-pink);
+  animation: textGlow 1.5s infinite alternate;
+}
+
+.retro-text-green {
+  text-shadow: 
+    0 0 5px var(--retro-neon-green),
+    0 0 10px var(--retro-neon-green),
+    0 0 15px var(--retro-neon-green);
+  animation: textGlow 1.5s infinite alternate;
+}
+
+.retro-text-orange {
+  text-shadow: 
+    0 0 5px var(--retro-orange),
+    0 0 10px var(--retro-orange),
+    0 0 15px var(--retro-orange);
+  animation: textGlow 1.5s infinite alternate;
+}
+
+.retro-border {
+  box-shadow: 
+    0 0 5px var(--retro-neon-blue),
+    0 0 10px var(--retro-neon-blue),
+    inset 0 0 5px var(--retro-neon-blue);
+  animation: borderGlow 2s infinite alternate;
+}
+
+.retro-border-pink {
+  box-shadow: 
+    0 0 5px var(--retro-neon-pink),
+    0 0 10px var(--retro-neon-pink),
+    inset 0 0 5px var(--retro-neon-pink);
+  animation: borderGlow 2s infinite alternate;
+}
+
+.retro-border-green {
+  box-shadow: 
+    0 0 5px var(--retro-neon-green),
+    0 0 10px var(--retro-neon-green),
+    inset 0 0 5px var(--retro-neon-green);
+  animation: borderGlow 2s infinite alternate;
+}
+
+.retro-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.retro-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    linear-gradient(45deg, 
+      rgba(153, 0, 255, 0.15), 
+      rgba(0, 255, 255, 0.15), 
+      rgba(0, 255, 0, 0.15));
+  z-index: -1;
+}
+
+.retro-grid {
+  background-image: linear-gradient(rgba(153, 0, 255, 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(153, 0, 255, 0.2) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Scanline efekti */
+.retro-scanlines {
+  position: relative;
+}
+
+.retro-scanlines::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  background-size: 100% 4px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* CRT effect */
+.retro-crt {
+  position: relative;
+  overflow: hidden;
+}
+
+.retro-crt::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.3) 90%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+@keyframes textGlow {
+  0% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes borderGlow {
+  0% {
+    box-shadow: 0 0 5px currentColor, 0 0 10px currentColor;
+  }
+  100% {
+    box-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+  }
+}
+
+/* Blink animasyonu */
+.retro-blink {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Glitch efekti */
+.retro-glitch {
+  position: relative;
+}
+
+.retro-glitch:hover {
+  animation: glitch 0.5s cubic-bezier(.25, .46, .45, .94) both infinite;
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+/* Scroll Barlar İçin Özelleştirme */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--secondary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ring);
+}
+
+/* Retro terminal styling */
+.retro-terminal {
+  background-color: #0D0D0D;
+  color: #33FF33;
+  font-family: monospace;
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid #33FF33;
+  box-shadow: 0 0 10px rgba(51, 255, 51, 0.5);
+}
+
+.retro-terminal::before {
+  content: ">";
+  margin-right: 0.5rem;
+}
+
+/* Synthwave background */
+.synthwave-bg {
+  background: linear-gradient(to bottom, #000035, #120041, #250042, #3d0051, #6b0069);
+}
+
+/* Animasyon durdurma/duraklatma */
+.animate-paused * {
+  animation-play-state: paused !important;
+}
+
+/* Matrix Animasyonları */
+.matrix-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.05); /* Daha da şeffaf arkaplan */
+  will-change: opacity;
+  backface-visibility: hidden; /* GPU hızlandırma için */
+  transform: translateZ(0); /* GPU hızlandırma için */
+}
+
+.matrix-drop {
+  position: absolute;
+  color: #33FF33;
+  font-family: monospace;
+  text-align: center;
+  animation: matrix-rain-fall linear infinite forwards; 
+  text-shadow: 0 0 8px #33FF33;
+  transform-origin: center;
+  z-index: 1;
+  will-change: transform, opacity;
+  backface-visibility: hidden; /* GPU hızlandırma için */
+  transform: translateZ(0); /* GPU hızlandırma için */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Matrix Kart Stilleri */
+.matrix-card {
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(51, 255, 51, 0.3);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 15px rgba(51, 255, 51, 0.2);
+  transition: all 0.3s ease;
+  will-change: transform, box-shadow;
+  transform: translateZ(0); /* GPU hızlandırma için */
+}
+
+.matrix-card:hover {
+  box-shadow: 0 0 20px rgba(51, 255, 51, 0.3);
+  transform: translateY(-2px);
+}
+
+.matrix-card .matrix-rain {
+  position: absolute;
+  background-color: transparent;
+}
+
+.matrix-card-content {
+  position: relative;
+  z-index: 10;
+}
+
+/* Karakterlerin düşme hızı - GPU hızlandırmalı */
+@keyframes matrix-rain-fall {
+  0% {
+    transform: translateY(-150px) scale(1);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.2;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  20% {
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0.9;
+  }
+  95% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(105vh) scale(0.98);
+    opacity: 0;
+  }
+}
+
+/* İlk karakter için daha parlak animasyon */
+@keyframes head-flicker {
+  0%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 15px #33FF33, 0 0 20px #33FF33;
+    color: #FFFFFF;
+  }
+  50% {
+    opacity: 0.9;
+    text-shadow: 0 0 10px #33FF33, 0 0 15px #33FF33;
+    color: #CCFFCC;
+  }
+}
+
+/* Tarayıcı optimizasyonları */
+@media (prefers-reduced-motion) {
+  .matrix-drop {
+    animation-duration: 5s !important;
+  }
+  
+  @keyframes matrix-rain-fall {
+    0% {
+      transform: translateY(-150px);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.6;
+    }
+    90% {
+      opacity: 0.6;
+    }
+    100% {
+      transform: translateY(105vh);
+      opacity: 0;
+    }
+  }
+}
+
+/* Düşük güçlü cihazlar için performans optimizasyonları */
+@media (max-width: 768px) {
+  .matrix-drop {
+    text-shadow: 0 0 5px #33FF33;
+  }
+  
+  @keyframes head-flicker {
+    0%, 100% {
+      opacity: 1;
+      text-shadow: 0 0 8px #33FF33;
+    }
+    50% {
+      opacity: 0.8;
+      text-shadow: 0 0 5px #33FF33;
+    }
+  }
+}
+
+/* Matrix Text Effect */
+.matrix-text {
+  position: relative;
+  font-family: monospace;
+  letter-spacing: 0.1em;
+  color: #33FF33;
+  text-shadow: 0 0 5px #33FF33;
+  animation: matrix-text-flicker 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes matrix-text-flicker {
+  0% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 1;
+  }
+  31% {
+    opacity: 0.8;
+  }
+  32% {
+    opacity: 1;
+  }
+  97% {
+    opacity: 1;
+  }
+  98% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Matrix Loading Bar */
+.matrix-loading {
+  width: 100%;
+  height: 4px;
+  background: rgba(51, 255, 51, 0.1);
+  position: relative;
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+.matrix-loading::before {
+  content: '';
+  position: absolute;
+  left: -50%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #33FF33, transparent);
+  animation: matrix-loading 1.5s infinite linear;
+}
+
+@keyframes matrix-loading {
+  0% {
+    left: -50%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+/* Retro Marquee Band - Fullwidth at bottom */
+.retro-band-fullwidth {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: black;
+  padding: 0.5rem 0;
+  overflow: hidden;
+  border-top: 1px solid #33FF33;
+  z-index: 50;
+}
+
+/* Retro Marquee Band - Fullwidth at top */
+.retro-band-topwidth {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: black;
+  padding: 0.5rem 0;
+  overflow: hidden;
+  border-bottom: 1px solid #33FF33;
+  z-index: 50;
+}
+
+/* Matrix Metin Efektleri */
+.text-shadow-green {
+  text-shadow: 0 0 5px #33FF33, 0 0 10px #33FF33, 0 0 15px #33FF33;
+}
+
+.text-shadow-pink {
+  text-shadow: 0 0 5px #9900FF, 0 0 10px #9900FF, 0 0 15px #9900FF;
+}
