@@ -1,4 +1,4 @@
-import { Elysia, t } from 'elysia';
+import { Elysia } from 'elysia';
 import { PrismaClient } from '@prisma/client';
 import { requireAuth } from '../middlewares/auth.middleware.js';
 const prisma = new PrismaClient();
@@ -82,14 +82,18 @@ export const postController = new Elysia({ prefix: '/posts' })
             message: 'Sunucu hatası'
         };
     }
-}, {
-    params: t.Object({
-        id: t.String()
-    })
 })
     // Kullanıcının kendi gönderilerini getir
-    .get('/user/:userId', requireAuth, async ({ params, user, set }) => {
+    .use(requireAuth)
+    .get('/user/:userId', async ({ params, user, set }) => {
     try {
+        if (!user) {
+            set.status = 401;
+            return {
+                status: 'error',
+                message: 'Yetkilendirme gerekli'
+            };
+        }
         const { userId } = params;
         // Eğer başka bir kullanıcının gönderileri isteniyorsa admin yetkisi gerekli
         if (userId !== user.userId && user.role !== 'ADMIN') {
@@ -133,14 +137,18 @@ export const postController = new Elysia({ prefix: '/posts' })
             message: 'Sunucu hatası'
         };
     }
-}, {
-    params: t.Object({
-        userId: t.String()
-    })
 })
     // Kullanıcının beğendiği gönderileri getir
-    .get('/liked', requireAuth, async ({ user, set }) => {
+    .use(requireAuth)
+    .get('/liked', async ({ user, set }) => {
     try {
+        if (!user) {
+            set.status = 401;
+            return {
+                status: 'error',
+                message: 'Yetkilendirme gerekli'
+            };
+        }
         // Kullanıcının beğendiği gönderileri bul
         const likedPosts = await prisma.like.findMany({
             where: { userId: user.userId, postId: { not: null } },
@@ -189,7 +197,15 @@ export const postController = new Elysia({ prefix: '/posts' })
     .use(requireAuth)
     .post('/', async ({ body, user, set }) => {
     try {
-        const { title, description, tag } = body;
+        if (!user) {
+            set.status = 401;
+            return {
+                status: 'error',
+                message: 'Yetkilendirme gerekli'
+            };
+        }
+        const postData = body;
+        const { title, description, tag } = postData;
         const post = await prisma.post.create({
             data: {
                 title,
@@ -212,19 +228,21 @@ export const postController = new Elysia({ prefix: '/posts' })
             message: 'Sunucu hatası'
         };
     }
-}, {
-    body: t.Object({
-        title: t.String(),
-        description: t.String(),
-        tag: t.String()
-    })
 })
     // Gönderiyi güncelle
     .use(requireAuth)
     .put('/:id', async ({ params, body, user, set }) => {
     try {
+        if (!user) {
+            set.status = 401;
+            return {
+                status: 'error',
+                message: 'Yetkilendirme gerekli'
+            };
+        }
         const { id } = params;
-        const { title, description, tag } = body;
+        const postData = body;
+        const { title, description, tag } = postData;
         // Gönderiyi bul
         const post = await prisma.post.findUnique({
             where: { id }
@@ -267,20 +285,18 @@ export const postController = new Elysia({ prefix: '/posts' })
             message: 'Sunucu hatası'
         };
     }
-}, {
-    params: t.Object({
-        id: t.String()
-    }),
-    body: t.Object({
-        title: t.Optional(t.String()),
-        description: t.Optional(t.String()),
-        tag: t.Optional(t.String())
-    })
 })
     // Gönderi sil
     .use(requireAuth)
     .delete('/:id', async ({ params, user, set }) => {
     try {
+        if (!user) {
+            set.status = 401;
+            return {
+                status: 'error',
+                message: 'Yetkilendirme gerekli'
+            };
+        }
         const { id } = params;
         // Gönderiyi bul
         const post = await prisma.post.findUnique({
@@ -318,15 +334,18 @@ export const postController = new Elysia({ prefix: '/posts' })
             message: 'Sunucu hatası'
         };
     }
-}, {
-    params: t.Object({
-        id: t.String()
-    })
 })
     // Gönderiyi beğen/beğenmekten vazgeç
     .use(requireAuth)
     .post('/:id/like', async ({ params, user, set }) => {
     try {
+        if (!user) {
+            set.status = 401;
+            return {
+                status: 'error',
+                message: 'Yetkilendirme gerekli'
+            };
+        }
         const { id } = params;
         // Gönderiyi bul
         const post = await prisma.post.findUnique({
@@ -378,8 +397,4 @@ export const postController = new Elysia({ prefix: '/posts' })
             message: 'Sunucu hatası'
         };
     }
-}, {
-    params: t.Object({
-        id: t.String()
-    })
 });
