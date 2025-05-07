@@ -4,28 +4,23 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { MatrixMarquee, MatrixMarqueeTop, MatrixRain, MatrixCard, MatrixCardControl } from "@/components/ui/matrix-effect";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useMatrixStore } from "@/lib/matrix-store";
+import React from "react";
 
-const AnimatedLogo = () => {
+const AnimatedLogo = React.memo(() => {
   return (
     <div className="w-24 h-24 bg-black border-2 border-[#33FF33] rounded-full mx-auto mb-6 flex items-center justify-center relative overflow-hidden retro-border-green">
-      {}
       <div className="absolute inset-0 bg-[#33FF33]/5 rounded-full animate-pulse" style={{ animationDuration: '3s' }}></div>
-      
-      {}
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="w-full h-full border-2 border-[#33FF33]/20 rounded-full transform scale-50 animate-ping" style={{ animationDuration: '3s' }}></div>
       </div>
-      
-      {}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-4 left-4 text-[8px] font-mono text-[#33FF33] animate-pulse" style={{ animationDuration: '1.5s' }}>01001</div>
         <div className="absolute top-8 left-8 text-[8px] font-mono text-[#33FF33] animate-pulse" style={{ animationDuration: '2s' }}>10110</div>
         <div className="absolute bottom-4 right-4 text-[8px] font-mono text-[#33FF33] animate-pulse" style={{ animationDuration: '1.8s' }}>01101</div>
         <div className="absolute bottom-8 right-8 text-[8px] font-mono text-[#33FF33] animate-pulse" style={{ animationDuration: '2.2s' }}>10010</div>
       </div>
-      
-      {}
       <div className="font-mono text-4xl font-bold flex items-center z-10 relative">
         <span className="text-[#33FF33] relative animate-pulse" style={{ animationDuration: '1.8s' }}>
           &lt;
@@ -40,12 +35,11 @@ const AnimatedLogo = () => {
           <span className="absolute top-0 left-0 w-full h-full text-[#33FF33]/70 blur-[1px] animate-pulse" style={{ animationDuration: '2.2s' }}>&gt;</span>
         </span>
       </div>
-      
-      {}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#33FF33]/20 to-transparent animate-pulse-slow -skew-x-12" style={{ animationDuration: '4s' }}></div>
     </div>
   );
-};
+});
+AnimatedLogo.displayName = 'AnimatedLogo';
 
 const AuthButtons = () => (
   <div className="flex justify-center space-x-4 my-6">
@@ -137,7 +131,10 @@ const posts = [
     description: "Yeni projemde Next.js 15 kullanıyorum ve SSR sayfalarında beklenmedik performans sorunlarıyla karşılaşıyorum. Özellikle ilk yükleme süresi çok uzun. Benzer sorunla karşılaşan veya çözüm önerisi olan var mı?",
     author: "Ahmet Yılmaz",
     likes: 24,
-    comments: 8,
+    comments: [
+      { id: 1, author: "Mehmet Demir", content: "Ben de benzer sorunlar yaşadım. React Query kullanmayı deneyebilirsin, SWR yerine daha iyi performans aldım.", date: "2 saat önce" },
+      { id: 2, author: "Zeynep Kaya", content: "getStaticProps ve Incremental Static Regeneration kullanmayı denedin mi? SSR yerine bu yöntemler daha hızlı olabilir senin kullanım senaryonda.", date: "1 saat önce" }
+    ],
     createdAt: "2 saat önce",
     tag: "React",
     color: "bg-blue-900/30"
@@ -148,7 +145,10 @@ const posts = [
     description: "Uzun süredir Tailwind CSS kullanıyorum ancak büyük projelerde stil yönetimi zorlaşıyor. Ekip olarak kullandığınız best practice'ler nelerdir? Özellikle component'lerde stil tekrarını nasıl önlüyorsunuz?",
     author: "Zeynep Kaya",
     likes: 42,
-    comments: 15,
+    comments: [
+      { id: 1, author: "Ayşe Yıldız", content: "Biz bir design system oluşturduk ve tüm componentleri içinde topladık. Tailwind class'larını bir kere tanımlayıp sonra bu componentleri kullanıyoruz.", date: "3 saat önce" },
+      { id: 2, author: "Murat Şahin", content: "Tailwind Merge ve clsx kütüphanelerini kullanabilirsin. Conditional styling için çok faydalı oluyorlar ve kod tekrarını azaltıyorlar.", date: "2 saat önce" }
+    ],
     createdAt: "5 saat önce",
     tag: "Frontend",
     color: "bg-pink-900/30"
@@ -159,7 +159,10 @@ const posts = [
     description: "TypeScript ile kompleks tip tanımlamalarında zorlanıyorum. Özellikle union tiplerde type narrowing yaparken verimli yaklaşımlar nelerdir? Kod tabanınızda kullandığınız pattern'ler var mı?",
     author: "Mehmet Demir",
     likes: 18,
-    comments: 6,
+    comments: [
+      { id: 1, author: "Cem Yılmaz", content: "Discriminated unions kullanmak en temiz çözüm. Her tipin ayırt edici bir özelliği olması önemli.", date: "5 saat önce" },
+      { id: 2, author: "Deniz Kaya", content: "TypeScript 4.5+ ile gelen 'as const' notasyonu ve 'satisfies' operatörü tip güvenliğini artırmada çok yardımcı oluyor.", date: "4 saat önce" }
+    ],
     createdAt: "1 gün önce",
     tag: "TypeScript",
     color: "bg-purple-900/30"
@@ -170,7 +173,10 @@ const posts = [
     description: "Express tabanlı bir Node.js API'si geliştiriyorum ve DoS saldırılarına karşı rate limiting uygulamak istiyorum. Redis kullanarak nasıl verimli bir şekilde bunu yapabilirim?",
     author: "Emre Can",
     likes: 31,
-    comments: 12,
+    comments: [
+      { id: 1, author: "Ali Veli", content: "Express-rate-limit paketi başlangıç için yeterli olabilir.", date: "2 saat önce" },
+      { id: 2, author: "Seda Yılmaz", content: "Redis ile rate limiting yapmak için rate-limit-redis kullanabilirsin.", date: "1 saat önce" }
+    ],
     createdAt: "3 saat önce",
     tag: "Node",
     color: "bg-green-900/30"
@@ -181,7 +187,10 @@ const posts = [
     description: "Vue 3 ile bir proje geliştiriyorum ve Vuex kullanmadan Composition API ile global state yönetimi yapmak istiyorum. Önerilen yaklaşımlar nelerdir?",
     author: "Deniz Yıldız",
     likes: 27,
-    comments: 9,
+    comments: [
+      { id: 1, author: "Kemal Sunal", content: "Provide/inject API'si küçük-orta ölçekli uygulamalar için yeterli olabilir.", date: "6 saat önce" },
+      { id: 2, author: "Filiz Akın", content: "Pinia kullanmanı öneririm, Vuex'ten daha modern ve TypeScript dostu.", date: "5 saat önce" }
+    ],
     createdAt: "8 saat önce",
     tag: "Vue",
     color: "bg-emerald-900/30"
@@ -192,7 +201,10 @@ const posts = [
     description: "Büyük bir Angular uygulamasında yaşadığımız performans sorunlarını nasıl çözebiliriz? Change detection optimizasyonu ve lazy loading dışında önerileriniz var mı?",
     author: "Selin Kara",
     likes: 15,
-    comments: 7,
+    comments: [
+      { id: 1, author: "Tarık Akan", content: "OnPush change detection strategy'yi tüm componentlerde kullan.", date: "12 saat önce" },
+      { id: 2, author: "Türkan Şoray", content: "Trackby fonksiyonunu ngFor direktiflerinde kullanmak da önemli bir optimizasyon.", date: "10 saat önce" }
+    ],
     createdAt: "1 gün önce",
     tag: "Angular",
     color: "bg-red-900/30"
@@ -491,12 +503,117 @@ const LoginRequiredMessage = () => (
   </div>
 );
 
+// React.memo ile post bileşenini optimize et
+const PostItem = React.memo(({ post, onLike, isLiked }: { 
+  post: {
+    id: string | number;
+    title: string;
+    description: string;
+    author: string;
+    likes: number;
+    comments: number | { id: number; author: string; content: string; date: string }[];
+    createdAt: string;
+    tag: string;
+    color: string;
+  }, 
+  onLike: (id: string, e: React.MouseEvent) => void,
+  isLiked: boolean
+}) => {
+  return (
+    <div className="mb-4">
+      <MatrixCard>
+        <Card className="border-[#33FF33] bg-black/80 hover:shadow-lg transition-all duration-300 overflow-hidden backdrop-blur-sm relative z-10">
+          <div className={`h-1 ${post.color}`}></div>
+          <CardHeader className="pb-2 relative">
+            <div className="flex items-center gap-2 mb-2">
+              <span className={`text-xs px-2 py-1 rounded-full ${post.color} text-white font-mono font-bold`}>
+                {post.tag}
+              </span>
+            </div>
+            <CardTitle className="text-xl font-semibold text-[#33FF33] font-mono cursor-pointer" onClick={() => window.location.href = `/posts/${post.id}`}>
+              {post.title}
+            </CardTitle>
+            <div className="flex items-center space-x-2 text-sm text-[#33FF33]/80 font-mono">
+              <span>{post.author}</span>
+              <span>●</span>
+              <span>{post.createdAt}</span>
+            </div>
+          </CardHeader>
+          <CardContent className="pb-2" onClick={() => window.location.href = `/posts/${post.id}`}>
+            <CardDescription className="text-white font-mono line-clamp-3 cursor-pointer">
+              {post.description}
+            </CardDescription>
+          </CardContent>
+          <CardFooter className="flex justify-between items-center pt-2">
+            <div className="flex items-center space-x-4 text-[#33FF33]">
+              <div 
+                className={`flex items-center space-x-1 cursor-pointer hover:text-[#33FF33]/80 transition-colors ${isLiked ? 'text-[#ff9900]' : ''}`}
+                onClick={(e) => onLike(post.id.toString(), e)}
+              >
+                <span role="img" aria-label="beğeni" className="text-sm">{isLiked ? '❤️' : '👍'}</span>
+                <span className="text-sm">{post.likes + (isLiked ? 1 : 0)}</span>
+              </div>
+              <div 
+                className="flex items-center space-x-1 cursor-pointer hover:text-[#33FF33]/80 transition-colors"
+                onClick={() => window.location.href = `/posts/${post.id}`}
+              >
+                <span role="img" aria-label="yorum" className="text-sm">💬</span>
+                <span className="text-sm">{Array.isArray(post.comments) ? post.comments.length : post.comments}</span>
+              </div>
+            </div>
+            <div>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                asChild 
+                className="relative border border-[#33FF33] bg-black hover:bg-[#33FF33]/10 text-[#33FF33] font-mono px-2 py-0 h-7"
+              >
+                <Link href={`/posts/${post.id}`}>
+                  <span className="relative z-10 text-xs">[ DETAYLAR ]</span>
+                </Link>
+              </Button>
+            </div>
+          </CardFooter>
+        </Card>
+      </MatrixCard>
+    </div>
+  );
+});
+PostItem.displayName = 'PostItem';
+
 export default function Home() {
-  
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const matrixStore = useMatrixStore();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [showTechnologies, setShowTechnologies] = useState(false);
+  
+  // Sayfa scroll pozisyonunu sakla
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [visiblePosts, setVisiblePosts] = useState<typeof posts>([]);
+  
+  // İlk render'da tüm postları yükleme
+  useEffect(() => {
+    // Sadece ilk 5 postu hemen göster
+    setVisiblePosts(posts.slice(0, 5));
+    
+    // Geri kalan postları daha sonra yükle
+    const timer = setTimeout(() => {
+      setVisiblePosts(posts);
+      setIsLoaded(true);
+    }, 300);
+    
+    return () => clearTimeout(timer);
+  }, []);
+  
+  // Kategori değiştiğinde filtrelemeyi etkin bir şekilde gerçekleştir
+  useEffect(() => {
+    if (activeCategory) {
+      const filtered = posts.filter(post => post.tag.toLowerCase() === activeCategory.toLowerCase());
+      setVisiblePosts(filtered);
+    } else {
+      setVisiblePosts(posts);
+    }
+  }, [activeCategory]);
   
   const handleNewPostClick = () => {
     setIsDialogOpen(true);
@@ -506,16 +623,17 @@ export default function Home() {
     setIsDialogOpen(false);
   };
   
-  
   const toggleLogin = () => {
-    setIsLoggedIn(prevState => !prevState);
+    if (matrixStore.isLoggedIn) {
+      matrixStore.logout();
+    } else {
+      matrixStore.login();
+    }
   };
-
   
   const toggleTechnologies = () => {
     setShowTechnologies(prev => !prev);
   };
-
   
   const filterByCategory = (category: string) => {
     if (activeCategory === category) {
@@ -525,55 +643,50 @@ export default function Home() {
     }
   };
   
-  
-  const filteredPosts = activeCategory 
-    ? posts.filter(post => post.tag.toLowerCase() === activeCategory.toLowerCase())
-    : posts;
+  const handleLikePost = (postId: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (matrixStore.isLoggedIn) {
+      matrixStore.toggleLike(postId);
+    } else {
+      setIsDialogOpen(true);
+    }
+  };
   
   const marqueeText = "DEV FEEDBACK - YAZILIMCI GERİ BİLDİRİM PLATFORMU * TÜM YAZILIMCILAR İÇİN PAYLAŞIM ORTAMI * SORULARINIZI PAYLAŞIN, CEVAPLAR ALIN * ";
   const marqueeTopText = "NEXT.JS * REACT * VUE * ANGULAR * NODE * DEVFEEDBACK.SYS * ÇALIŞTIRılıyor * SİSTEM AKTİF * ";
 
   return (
     <div className="min-h-screen bg-black py-12 px-4 relative overflow-hidden">
-      {}
       <MatrixRain />
       
       <MatrixMarqueeTop text={marqueeTopText} />
       
-      {}
       <RetroDialog 
         isOpen={isDialogOpen} 
         onClose={closeDialog} 
-        title={isLoggedIn ? "YENİ GÖNDERİ OLUŞTUR" : "ERİŞİM REDDEDİLDİ"}
+        title={matrixStore.isLoggedIn ? "YENİ GÖNDERİ OLUŞTUR" : "ERİŞİM REDDEDİLDİ"}
       >
-        {isLoggedIn ? <NewPostForm /> : <LoginRequiredMessage />}
+        {matrixStore.isLoggedIn ? <NewPostForm /> : <LoginRequiredMessage />}
       </RetroDialog>
       
       <div className="max-w-4xl mx-auto relative mt-8 mb-20 z-20">
-        {}
         <MatrixCardControl className="mb-12">
           <div className="p-8">
-            {}
             <div className="mb-8 text-center">
               <AnimatedLogo />
               
               <h1 className="text-3xl sm:text-4xl font-bold text-[#33FF33] mb-4 font-mono text-shadow-green">
-                DevFeedback – Geliştiriciler için Geri Bildirim Platformu
+                DevFeedback 
               </h1>
               <p className="text-lg text-[#33FF33]/90 font-mono bg-black/50 inline-block px-4 py-2 rounded shadow-lg">
                 Sorularınızı paylaşın, deneyimli geliştiricilerden geri bildirimler alın
               </p>
-              
-              {}
-              <div className="mt-4 text-xs text-[#33FF33] font-mono animate-pulse">
-                [SİSTEM DURUMU: AKTİF] - SAĞ ÜST BUTONU KULLANARAK MATRIX ANİMASYONUNU KONTROL EDEBİLİRSİNİZ
-              </div>
             </div>
 
-            {}
             <AuthButtons />
 
-            {}
             <div className="flex justify-center mt-6 mb-4">
               <Button 
                 className="bg-black hover:bg-[#ff9900]/10 relative overflow-hidden border-2 border-[#ff9900] text-[#ff9900] font-mono px-5 py-2 h-auto text-base retro-text-orange shadow-[0_0_10px_rgba(255,153,0,0.5)]"
@@ -583,10 +696,8 @@ export default function Home() {
               </Button>
             </div>
 
-            {}
             <TechIcons onSelectCategory={filterByCategory} activeCategory={activeCategory} isVisible={showTechnologies} />
 
-            {}
             <div className="flex justify-center mt-6">
               <div className="retro-pixel-container">
                 <Button 
@@ -604,7 +715,6 @@ export default function Home() {
           </div>
         </MatrixCardControl>
 
-        {}
         <div className="space-y-6 mt-10">
           <div className="flex items-center justify-between mb-6">
             <div className="h-[1px] flex-grow bg-gradient-to-r from-transparent via-[#33FF33]/50 to-transparent"></div>
@@ -612,64 +722,24 @@ export default function Home() {
             <div className="h-[1px] flex-grow bg-gradient-to-r from-transparent via-[#33FF33]/50 to-transparent"></div>
           </div>
           
-          {filteredPosts.length > 0 ? (
-            filteredPosts.map((post) => (
-              <div key={post.id} className="mb-4">
-                <MatrixCard>
-                  <Card className="border-[#33FF33] bg-black/80 hover:shadow-lg transition-all duration-300 overflow-hidden backdrop-blur-sm relative z-10">
-                    <div className={`h-1 ${post.color}`}></div>
-                    <CardHeader className="pb-2 relative">
-                      <div className="absolute -right-6 -top-6 w-12 h-12 rounded-full opacity-10 bg-slate-300"></div>
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className={`text-xs px-2 py-1 rounded-full ${post.color} text-white font-mono font-bold`}>
-                          {post.tag}
-                        </span>
-                      </div>
-                      <CardTitle className="text-xl font-semibold text-[#33FF33] font-mono">
-                        {post.title}
-                      </CardTitle>
-                      <div className="flex items-center space-x-2 text-sm text-[#33FF33]/80 font-mono">
-                        <span>{post.author}</span>
-                        <span>●</span>
-                        <span>{post.createdAt}</span>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="pb-2">
-                      <CardDescription className="text-white font-mono line-clamp-3">
-                        {post.description}
-                      </CardDescription>
-                    </CardContent>
-                    <CardFooter className="flex justify-between items-center pt-2">
-                      <div className="flex items-center space-x-4 text-[#33FF33]">
-                        <div className="flex items-center space-x-1">
-                          <span role="img" aria-label="beğeni" className="text-sm">👍</span>
-                          <span className="text-sm">{post.likes}</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <span role="img" aria-label="yorum" className="text-sm">💬</span>
-                          <span className="text-sm">{post.comments}</span>
-                        </div>
-                      </div>
-                      <div>
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          asChild 
-                          className="relative border border-[#33FF33] bg-black hover:bg-[#33FF33]/10 text-[#33FF33] font-mono px-2 py-0 h-7"
-                        >
-                          <Link href={`/posts/${post.id}`}>
-                            <span className="relative z-10 text-xs">[ DETAYLAR ]</span>
-                          </Link>
-                        </Button>
-                      </div>
-                    </CardFooter>
-                  </Card>
-                </MatrixCard>
-              </div>
+          {visiblePosts.length > 0 ? (
+            visiblePosts.map((post) => (
+              <PostItem
+                key={post.id}
+                post={post}
+                onLike={handleLikePost}
+                isLiked={matrixStore.isPostLiked(post.id.toString())}
+              />
             ))
           ) : (
             <div className="text-center p-10 border border-[#33FF33]/30 rounded-xl bg-black/50">
               <p className="text-[#33FF33] font-mono matrix-text">SEÇİLEN KATEGORİDE GÖNDERİ BULUNAMADI</p>
+            </div>
+          )}
+          
+          {!isLoaded && posts.length > 5 && (
+            <div className="text-center p-4">
+              <p className="text-[#33FF33] font-mono animate-pulse">Diğer gönderiler yükleniyor...</p>
             </div>
           )}
         </div>
@@ -678,15 +748,14 @@ export default function Home() {
           © 2024 DEVFEEDBACK.SYS 
         </div>
         
-        {}
         <div className="fixed bottom-20 right-6 flex flex-col gap-2">
           <Button 
             className="bg-black hover:bg-[#33FF33]/10 border border-[#33FF33] text-[#33FF33] text-xs px-2 py-1 h-auto font-mono"
             onClick={toggleLogin}
           >
-            <span className="matrix-text">[DEMO: {isLoggedIn ? 'ÇIKIŞ YAP' : 'GİRİŞ YAP'}]</span>
+            <span className="matrix-text">[DEMO: {matrixStore.isLoggedIn ? 'ÇIKIŞ YAP' : 'GİRİŞ YAP'}]</span>
           </Button>
-          {isLoggedIn && (
+          {matrixStore.isLoggedIn && (
             <div className="text-xs text-[#33FF33] font-mono text-center">
               Giriş yapıldı
             </div>

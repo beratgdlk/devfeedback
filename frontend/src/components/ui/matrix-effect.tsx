@@ -58,17 +58,17 @@ export function MatrixRain({ contained = false }: { contained?: boolean }) {
 
     
 
-    const characters = '饺子 馄饨 包子 小笼包 面条 春卷 饺子皮 面粉 肉馅 葱姜蒜 白菜 胡萝卜 料酒 香油 水 盐 胡椒 蒸 煮 煎 炸 酱油 醋 芝麻油 香菜 辣椒 大蒜 酱料 調味料 香料 肉 菜 馅料 プログラミング コード ハッキング システム エラー バグ デバッグ アルゴリズム 関数 変数 オブジェクト クラス メソッド 配列 文字列 数値 </>{}[]();:/\\|=+-*&^%$#@!';
+    const characters = '</>{}[]();:/\\|=+-*&^%$#@!0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
     
 
     
 
-    const spacing = contained ? 12 : 16; 
+    const spacing = contained ? 20 : 30; 
 
     const containerWidth = contained ? 400 : window.innerWidth;
 
-    const numberOfDrops = Math.min(MAX_DROPS, Math.floor(containerWidth / spacing));
+    const numberOfDrops = Math.min(contained ? 40 : 100, Math.floor(containerWidth / spacing));
 
     
 
@@ -84,7 +84,7 @@ export function MatrixRain({ contained = false }: { contained?: boolean }) {
 
       duration: contained ? (3 + Math.random() * 5) : (4 + Math.random() * 8), 
 
-      chars: createMatrixColumn(characters, contained ? 12 : 20), 
+      chars: createMatrixColumn(characters, contained ? 8 : 12), 
 
       size: contained ? (10 + Math.floor(Math.random() * 2)) : (12 + Math.floor(Math.random() * 2)), 
 
@@ -120,7 +120,7 @@ export function MatrixRain({ contained = false }: { contained?: boolean }) {
 
     
 
-    if (timestamp - lastUpdateTimeRef.current < 800) {  
+    if (timestamp - lastUpdateTimeRef.current < 1500) {  
 
       animationFrameRef.current = requestAnimationFrame(updateDrops);
 
@@ -136,7 +136,7 @@ export function MatrixRain({ contained = false }: { contained?: boolean }) {
 
     
 
-    const characters = '饺子 馄饨 包子 小笼包 面条 春卷 饺子皮 面粉 肉馅 葱姜蒜 白菜 胡萝卜 料酒 香油 水 盐 胡椒 蒸 煮 煎 炸 酱油 醋 芝麻油 香菜 辣椒 大蒜 酱料 調味料 香料 肉 菜 馅料 プログラミング コード ハッキング システム エラー バグ デバッグ アルゴリズム 関数 変数 オブジェクト クラス メソッド 配列 文字列 数値 </>{}[]();:/\\|=+-*&^%$#@!';
+    const characters = '</>{}[]();:/\\|=+-*&^%$#@!0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
     
 
@@ -146,9 +146,9 @@ export function MatrixRain({ contained = false }: { contained?: boolean }) {
 
         ...drop,
 
-        chars: Math.random() > 0.9 
+        chars: Math.random() > 0.85 
 
-          ? createMatrixColumn(characters, contained ? 12 : 20)
+          ? createMatrixColumn(characters, contained ? 8 : 12)
 
           : drop.chars
 
@@ -196,7 +196,7 @@ export function MatrixRain({ contained = false }: { contained?: boolean }) {
 
       
 
-      const characters = '饺子 馄饨 包子 小笼包 面条 春卷 饺子皮 面粉 肉馅 葱姜蒜 白菜 胡萝卜 料酒 香油 水 盐 胡椒 蒸 煮 煎 炸 酱油 醋 芝麻油 香菜 辣椒 大蒜 酱料 調味料 香料 肉 菜 馅料 プログラミング コード ハッキング システム エラー バグ デバッグ アルゴリズム 関数 変数 オブジェクト クラス メソッド 配列 文字列 数値 </>{}[]();:/\\|=+-*&^%$#@!';
+      const characters = '</>{}[]();:/\\|=+-*&^%$#@!0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
       
 
@@ -210,7 +210,7 @@ export function MatrixRain({ contained = false }: { contained?: boolean }) {
 
         duration: contained ? (3 + Math.random() * 5) : (4 + Math.random() * 8),
 
-        chars: createMatrixColumn(characters, contained ? 12 : 20),
+        chars: createMatrixColumn(characters, contained ? 8 : 12),
 
         size: contained ? (10 + Math.floor(Math.random() * 2)) : (12 + Math.floor(Math.random() * 2)),
 
