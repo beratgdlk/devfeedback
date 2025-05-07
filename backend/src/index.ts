@@ -1,7 +1,9 @@
 import { Elysia } from 'elysia';
 import { createServer, IncomingMessage, ServerResponse } from 'node:http';
+import { authController } from './auth.controller.js';
 
 const app = new Elysia()
+  .use(authController)
   .get('/', () => 'Merhaba Dünya!');
 
 const PORT = 3002;
