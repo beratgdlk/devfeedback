@@ -60,15 +60,13 @@ export default function RegisterPage() {
 
   };
 
-  const marqueeText = "YENİ HESAP OLUŞTUR * DEV FEEDBACK * SECURE REGISTRATION * SİSTEM KAYIT * ADMIN ZONE * NEW USER * ";
+  const marqueeText = "NEW ACCOUNT * DEV FEEDBACK * SECURE REGISTRATION * ADMIN ZONE * NEW USER * CREDENTIALS SETUP * ";
 
-  const marqueeTopText = "YENİ KULLANICI KAYDI * KAYIT İŞLEMİ * HESAP OLUŞTUR * YAZILIMCI PORTALI * YETKİLENDİRME * ";
+  const marqueeTopText = "YENİ KULLANICI KAYDI * KAYIT İŞLEMİ * HESAP OLUŞTUR * YAZILIMCI PORTALI * YETKİLENDİRME * KULLANICI BİLGİLERİ * ";
 
   return (
 
     <div className="min-h-screen bg-black py-12 px-4 relative overflow-hidden flex flex-col items-center justify-center">
-
-      {}
 
       <MatrixRain />
 
@@ -79,6 +77,36 @@ export default function RegisterPage() {
       
 
       <div className="flex flex-col items-center justify-center w-full max-w-xl mx-auto z-20 relative">
+
+        <div className="absolute top-0 left-0 z-30">
+
+          <Button 
+
+            variant="outline" 
+
+            size="sm" 
+
+            asChild 
+
+            className="border-[#33FF33] bg-black/80 text-[#33FF33] hover:bg-[#33FF33]/20 font-mono retro-text mb-4 transition-all duration-300 hover:shadow-[0_0_8px_rgba(51,255,51,0.5)] hover:scale-105"
+
+          >
+
+            <Link href="/">
+
+              <svg className="w-4 h-4 mr-2 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+
+              </svg>
+
+              [ ANA SAYFA ]
+
+            </Link>
+
+          </Button>
+
+        </div>
 
         <MatrixCardControl className="w-full mb-16 p-6">
 
@@ -230,7 +258,7 @@ export default function RegisterPage() {
 
                 type="submit"
 
-                className="w-full h-12 bg-transparent hover:bg-[#9900FF]/10 relative overflow-hidden group border border-[#9900FF] text-[#9900FF] retro-text-pink font-mono matrix-text text-lg"
+                className="w-full h-12 bg-transparent hover:bg-[#9900FF]/10 relative overflow-hidden group border border-[#9900FF] text-[#9900FF] retro-text-pink font-mono matrix-text text-lg transition-all duration-300 hover:shadow-[0_0_12px_rgba(153,0,255,0.6)] hover:border-[#9900FF]/80"
 
                 disabled={isSubmitting}
 
@@ -238,7 +266,7 @@ export default function RegisterPage() {
 
                 <span className="relative z-10">{isSubmitting ? "KAYIT YAPILIYOR..." : "KAYIT OL"}</span>
 
-                <span className="absolute inset-0 w-0 bg-[#9900FF]/20 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute inset-0 w-0 bg-[#9900FF]/20 transition-all duration-500 group-hover:w-full"></span>
 
               </Button>
 

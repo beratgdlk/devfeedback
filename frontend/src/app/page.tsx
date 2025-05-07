@@ -10,32 +10,55 @@ import React from "react";
 
 const AnimatedLogo = React.memo(() => {
   return (
-    <div className="w-24 h-24 bg-black border-2 border-[#33FF33] rounded-full mx-auto mb-6 flex items-center justify-center relative overflow-hidden retro-border-green">
-      <div className="absolute inset-0 bg-[#33FF33]/5 rounded-full animate-pulse" style={{ animationDuration: '3s' }}></div>
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-full h-full border-2 border-[#33FF33]/20 rounded-full transform scale-50 animate-ping" style={{ animationDuration: '3s' }}></div>
+    <div className="w-40 h-40 mx-auto mb-6 flex items-center justify-center relative perspective-800">
+      {/* Dönen küp animasyonu */}
+      <div className="matrix-cube">
+        {/* Ön yüz */}
+        <div className="matrix-cube-face matrix-cube-front border-2 border-[#33FF33] flex items-center justify-center">
+          <span className="text-[#33FF33] text-xl font-mono retro-text">DF</span>
+        </div>
+        {/* Arka yüz */}
+        <div className="matrix-cube-face matrix-cube-back border-2 border-[#33FF33] flex items-center justify-center">
+          <span className="text-[#33FF33] text-xl font-mono retro-text">FD</span>
+        </div>
+        {/* Üst yüz */}
+        <div className="matrix-cube-face matrix-cube-top border-2 border-[#33FF33] flex items-center justify-center">
+          <span className="text-[#9900FF] text-xl font-mono retro-text">SYS</span>
+        </div>
+        {/* Alt yüz */}
+        <div className="matrix-cube-face matrix-cube-bottom border-2 border-[#33FF33] flex items-center justify-center">
+          <span className="text-[#9900FF] text-xl font-mono retro-text">SYS</span>
+        </div>
+        {/* Sol yüz */}
+        <div className="matrix-cube-face matrix-cube-left border-2 border-[#33FF33] flex items-center justify-center">
+          <span className="text-[#33FF33] text-xl font-mono retro-text">D</span>
+        </div>
+        {/* Sağ yüz */}
+        <div className="matrix-cube-face matrix-cube-right border-2 border-[#33FF33] flex items-center justify-center">
+          <span className="text-[#33FF33] text-xl font-mono retro-text">F</span>
+        </div>
       </div>
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-4 left-4 text-[8px] font-mono text-[#33FF33] animate-pulse" style={{ animationDuration: '1.5s' }}>01001</div>
-        <div className="absolute top-8 left-8 text-[8px] font-mono text-[#33FF33] animate-pulse" style={{ animationDuration: '2s' }}>10110</div>
-        <div className="absolute bottom-4 right-4 text-[8px] font-mono text-[#33FF33] animate-pulse" style={{ animationDuration: '1.8s' }}>01101</div>
-        <div className="absolute bottom-8 right-8 text-[8px] font-mono text-[#33FF33] animate-pulse" style={{ animationDuration: '2.2s' }}>10010</div>
+
+      {/* Arkada dikdörtgen pulsing ışıklar */}
+      <div className="absolute w-32 h-32 rounded-lg opacity-30 animate-pulse-slow" style={{ background: 'radial-gradient(circle, rgba(51,255,51,0.8) 0%, rgba(51,255,51,0) 70%)' }}></div>
+      <div className="absolute w-24 h-24 rotate-45 opacity-20 animate-pulse" style={{ background: 'radial-gradient(circle, rgba(153,0,255,0.8) 0%, rgba(153,0,255,0) 70%)', animationDelay: '0.5s' }}></div>
+
+      {/* Matrix kodu yağmuru - logo etrafında */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-40 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 left-1/4 text-[8px] font-mono text-[#33FF33] animate-matrix-fall" style={{ animationDuration: '2s', animationDelay: '0.2s' }}>10</div>
+        <div className="absolute top-0 left-1/3 text-[8px] font-mono text-[#33FF33] animate-matrix-fall" style={{ animationDuration: '2.5s', animationDelay: '0.8s' }}>01</div>
+        <div className="absolute top-0 left-1/2 text-[8px] font-mono text-[#33FF33] animate-matrix-fall" style={{ animationDuration: '1.8s', animationDelay: '0.5s' }}>11</div>
+        <div className="absolute top-0 left-2/3 text-[8px] font-mono text-[#33FF33] animate-matrix-fall" style={{ animationDuration: '2.2s', animationDelay: '0.3s' }}>00</div>
+        <div className="absolute top-0 left-3/4 text-[8px] font-mono text-[#33FF33] animate-matrix-fall" style={{ animationDuration: '1.9s', animationDelay: '1s' }}>10</div>
       </div>
-      <div className="font-mono text-4xl font-bold flex items-center z-10 relative">
-        <span className="text-[#33FF33] relative animate-pulse" style={{ animationDuration: '1.8s' }}>
-          &lt;
-          <span className="absolute top-0 left-0 w-full h-full text-[#33FF33]/70 blur-[1px] animate-pulse" style={{ animationDuration: '2.2s' }}>&lt;</span>
-        </span>
-        <span className="text-[#9900FF] mx-1 relative animate-pulse-slow" style={{ animationDuration: '2.2s' }}>
-          /
-          <span className="absolute top-0 left-0 w-full h-full text-[#9900FF]/70 blur-[2px] animate-pulse" style={{ animationDuration: '1.6s' }}>/</span>
-        </span>
-        <span className="text-[#33FF33] relative animate-pulse" style={{ animationDuration: '1.8s' }}>
-          &gt;
-          <span className="absolute top-0 left-0 w-full h-full text-[#33FF33]/70 blur-[1px] animate-pulse" style={{ animationDuration: '2.2s' }}>&gt;</span>
-        </span>
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#33FF33]/20 to-transparent animate-pulse-slow -skew-x-12" style={{ animationDuration: '4s' }}></div>
+
+      {/* Saydam parlama animasyonu */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#33FF33]/10 to-transparent animate-slide-left" style={{ animationDuration: '3s' }}></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[#9900FF]/10 to-transparent animate-slide-top" style={{ animationDuration: '3.5s' }}></div>
+      
+      {/* Dönüşen halka */}
+      <div className="absolute w-36 h-36 rounded-full border border-dashed border-[#33FF33]/30 animate-spin-slow"></div>
+      <div className="absolute w-40 h-40 rounded-full border border-dashed border-[#9900FF]/20 animate-reverse-spin-slow"></div>
     </div>
   );
 });
@@ -46,7 +69,7 @@ const AuthButtons = () => (
     <Link href="/login">
       <div className="retro-pixel-container">
         <Button 
-          className="font-mono relative overflow-hidden bg-black hover:bg-[#33FF33]/20 border-2 border-[#33FF33] text-[#33FF33] text-xs px-3 py-1 h-auto"
+          className="font-mono relative overflow-hidden bg-black hover:bg-[#33FF33]/20 border-2 border-[#33FF33] text-[#33FF33] text-xs px-3 py-1 h-auto transition-all duration-300 hover:shadow-[0_0_8px_rgba(51,255,51,0.6)] hover:text-white"
         >
           <div className="retro-corner-tl"></div>
           <div className="retro-corner-tr"></div>
@@ -59,7 +82,7 @@ const AuthButtons = () => (
     <Link href="/register">
       <div className="retro-pixel-container">
         <Button 
-          className="font-mono relative overflow-hidden bg-black hover:bg-[#9900FF]/20 border-2 border-[#9900FF] text-[#9900FF] text-xs px-3 py-1 h-auto"
+          className="font-mono relative overflow-hidden bg-black hover:bg-[#9900FF]/20 border-2 border-[#9900FF] text-[#9900FF] text-xs px-3 py-1 h-auto transition-all duration-300 hover:shadow-[0_0_8px_rgba(153,0,255,0.6)] hover:text-white"
         >
           <div className="retro-corner-tl-pink"></div>
           <div className="retro-corner-tr-pink"></div>
@@ -113,7 +136,7 @@ const TechIcons = ({ onSelectCategory, activeCategory, isVisible = true }: { onS
       {activeCategory && (
         <div className="mt-6 flex justify-center">
           <Button 
-            className="bg-transparent hover:bg-[#9900FF]/10 relative border border-[#9900FF] text-[#9900FF] text-xs font-mono retro-text-pink"
+            className="bg-transparent hover:bg-[#9900FF]/10 relative border border-[#9900FF] text-[#9900FF] text-xs font-mono retro-text-pink transition-all duration-300 hover:shadow-[0_0_8px_rgba(153,0,255,0.5)] hover:scale-105"
             onClick={() => onSelectCategory(activeCategory)}
           >
             FİLTREYİ KALDIR
@@ -462,14 +485,14 @@ const NewPostForm = () => {
       <div className="flex justify-end space-x-3 pt-2">
         <Button 
           type="button"
-          className="bg-transparent hover:bg-[#9900FF]/10 relative overflow-hidden group border border-[#9900FF] text-[#9900FF] font-mono retro-text-pink"
+          className="bg-transparent hover:bg-[#9900FF]/10 relative overflow-hidden group border border-[#9900FF] text-[#9900FF] font-mono retro-text-pink transition-all duration-300 hover:shadow-[0_0_8px_rgba(153,0,255,0.5)]"
           onClick={() => window.location.href = '/'}
         >
           İPTAL
         </Button>
         <Button 
           type="submit"
-          className="bg-transparent hover:bg-[#33FF33]/10 relative overflow-hidden group border border-[#33FF33] text-[#33FF33] font-mono matrix-text"
+          className="bg-transparent hover:bg-[#33FF33]/10 relative overflow-hidden group border border-[#33FF33] text-[#33FF33] font-mono matrix-text transition-all duration-300 hover:shadow-[0_0_8px_rgba(51,255,51,0.5)]"
           disabled={isSubmitting}
         >
           {isSubmitting ? "GÖNDERİLİYOR..." : "GÖNDER"}
@@ -566,7 +589,7 @@ const PostItem = React.memo(({ post, onLike, isLiked }: {
                 variant="outline" 
                 size="sm" 
                 asChild 
-                className="relative border border-[#33FF33] bg-black hover:bg-[#33FF33]/10 text-[#33FF33] font-mono px-2 py-0 h-7"
+                className="relative border border-[#33FF33] bg-black hover:bg-[#33FF33]/10 text-[#33FF33] font-mono px-2 py-0 h-7 transition-all duration-300 hover:shadow-[0_0_5px_rgba(51,255,51,0.5)]"
               >
                 <Link href={`/posts/${post.id}`}>
                   <span className="relative z-10 text-xs">[ DETAYLAR ]</span>
@@ -654,8 +677,9 @@ export default function Home() {
     }
   };
   
-  const marqueeText = "DEV FEEDBACK - YAZILIMCI GERİ BİLDİRİM PLATFORMU * TÜM YAZILIMCILAR İÇİN PAYLAŞIM ORTAMI * SORULARINIZI PAYLAŞIN, CEVAPLAR ALIN * ";
-  const marqueeTopText = "NEXT.JS * REACT * VUE * ANGULAR * NODE * DEVFEEDBACK.SYS * ÇALIŞTIRılıyor * SİSTEM AKTİF * ";
+  // Üstteki Türkçe, alttaki İngilizce olarak değiştirildi
+  const marqueeText = "DEV FEEDBACK - DEVELOPER PLATFORM * SHARE YOUR QUESTIONS * GET ANSWERS * MATRIX SYSTEM RUNNING * ACCESS GRANTED * ";
+  const marqueeTopText = "NEXT.JS * REACT * VUE * ANGULAR * NODE * YAZILIMCI GERİ BİLDİRİM PLATFORMU * TÜM YAZILIMCILAR İÇİN PAYLAŞIM ORTAMI * SORULARINIZI PAYLAŞIN * ";
 
   return (
     <div className="min-h-screen bg-black py-12 px-4 relative overflow-hidden">
@@ -689,7 +713,7 @@ export default function Home() {
 
             <div className="flex justify-center mt-6 mb-4">
               <Button 
-                className="bg-black hover:bg-[#ff9900]/10 relative overflow-hidden border-2 border-[#ff9900] text-[#ff9900] font-mono px-5 py-2 h-auto text-base retro-text-orange shadow-[0_0_10px_rgba(255,153,0,0.5)]"
+                className="bg-black hover:bg-[#ff9900]/10 relative overflow-hidden border-2 border-[#ff9900] text-[#ff9900] font-mono px-5 py-2 h-auto text-base retro-text-orange shadow-[0_0_10px_rgba(255,153,0,0.5)] transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,153,0,0.7)] hover:translate-y-[-2px]"
                 onClick={toggleTechnologies}
               >
                 [ TEKNOLOJİLER {showTechnologies ? '▲' : '▼'} ]
@@ -701,7 +725,7 @@ export default function Home() {
             <div className="flex justify-center mt-6">
               <div className="retro-pixel-container">
                 <Button 
-                  className="bg-black hover:bg-[#33FF33]/10 relative overflow-hidden group border-2 border-[#33FF33] text-[#33FF33] font-mono px-5 py-2 h-auto text-base"
+                  className="bg-black hover:bg-[#33FF33]/10 relative overflow-hidden group border-2 border-[#33FF33] text-[#33FF33] font-mono px-5 py-2 h-auto text-base transition-all duration-300 hover:shadow-[0_0_12px_rgba(51,255,51,0.6)] hover:translate-y-[-2px]"
                   onClick={handleNewPostClick}
                 >
                   <div className="retro-corner-tl"></div>
@@ -750,7 +774,7 @@ export default function Home() {
         
         <div className="fixed bottom-20 right-6 flex flex-col gap-2">
           <Button 
-            className="bg-black hover:bg-[#33FF33]/10 border border-[#33FF33] text-[#33FF33] text-xs px-2 py-1 h-auto font-mono"
+            className="bg-black hover:bg-[#33FF33]/10 border border-[#33FF33] text-[#33FF33] text-xs px-2 py-1 h-auto font-mono transition-all duration-300 hover:shadow-[0_0_8px_rgba(51,255,51,0.5)] hover:scale-105"
             onClick={toggleLogin}
           >
             <span className="matrix-text">[DEMO: {matrixStore.isLoggedIn ? 'ÇIKIŞ YAP' : 'GİRİŞ YAP'}]</span>

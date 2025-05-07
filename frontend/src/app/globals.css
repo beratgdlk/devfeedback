@@ -628,3 +628,135 @@ html {
 .text-shadow-pink {
   text-shadow: 0 0 5px #9900FF, 0 0 10px #9900FF, 0 0 15px #9900FF;
 }
+
+/* Matrix Küp Animasyonu */
+.matrix-cube {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(-15deg) rotateY(15deg);
+  animation: matrix-cube-rotate 10s infinite linear;
+  margin: 0 auto;
+  transform-origin: center center;
+}
+
+.perspective-800 {
+  perspective: 800px;
+}
+
+.matrix-cube-face {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid rgba(51, 255, 51, 0.7);
+  box-shadow: 0 0 10px rgba(51, 255, 51, 0.5);
+  backface-visibility: visible;
+}
+
+.matrix-cube-front {
+  transform: translateZ(40px);
+}
+
+.matrix-cube-back {
+  transform: rotateY(180deg) translateZ(40px);
+}
+
+.matrix-cube-right {
+  transform: rotateY(90deg) translateZ(40px);
+}
+
+.matrix-cube-left {
+  transform: rotateY(-90deg) translateZ(40px);
+}
+
+.matrix-cube-top {
+  transform: rotateX(90deg) translateZ(40px);
+}
+
+.matrix-cube-bottom {
+  transform: rotateX(-90deg) translateZ(40px);
+}
+
+@keyframes matrix-cube-rotate {
+  0% {
+    transform: rotateX(-15deg) rotateY(0deg);
+  }
+  25% {
+    transform: rotateX(45deg) rotateY(90deg);
+  }
+  50% {
+    transform: rotateX(-15deg) rotateY(180deg);
+  }
+  75% {
+    transform: rotateX(-60deg) rotateY(270deg);
+  }
+  100% {
+    transform: rotateX(-15deg) rotateY(360deg);
+  }
+}
+
+/* Matrix kod yağmuru animasyonu */
+@keyframes matrix-fall {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(200%);
+    opacity: 0;
+  }
+}
+
+.animate-matrix-fall {
+  animation: matrix-fall 2s linear infinite;
+}
+
+/* Kayma animasyonları */
+@keyframes slide-left {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-slide-left {
+  animation: slide-left 3s ease-in-out infinite;
+}
+
+@keyframes slide-top {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.animate-slide-top {
+  animation: slide-top 3.5s ease-in-out infinite;
+}
+
+/* Ters dönüş animasyonu */
+.animate-reverse-spin-slow {
+  animation: spin 20s linear infinite reverse;
+}
+
+.animate-spin-slow {
+  animation: spin 15s linear infinite;
+}

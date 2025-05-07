@@ -50,15 +50,13 @@ export default function LoginPage() {
 
   };
 
-  const marqueeText = "SİSTEME GİRİŞ * DEV FEEDBACK * ERROR 404 * ACCESS GRANTED * SYSTEM LOGIN * ROOT ACCESS * ADMIN LOGIN * ";
+  const marqueeText = "SYSTEM LOGIN * DEV FEEDBACK * ERROR 404 * ACCESS GRANTED * ROOT ACCESS * ADMIN LOGIN * AUTHENTICATION REQUIRED * ";
 
-  const marqueeTopText = "KULLANICI GİRİŞİ * YETKİLENDİRME * GÜVENLI GİRİŞ * DEV FEEDBACK * YÜKSEK GÜVENLİK * ";
+  const marqueeTopText = "KULLANICI GİRİŞİ * YETKİLENDİRME * GÜVENLI GİRİŞ * DEV FEEDBACK * SİSTEME GİRİŞ * YETKİ KONTROLÜ * ";
 
   return (
 
     <div className="min-h-screen bg-black py-12 px-4 relative overflow-hidden flex flex-col items-center justify-center">
-
-      {}
 
       <MatrixRain />
 
@@ -69,6 +67,36 @@ export default function LoginPage() {
       
 
       <div className="flex flex-col items-center justify-center w-full max-w-xl mx-auto z-20 relative">
+
+        <div className="absolute top-0 left-0 z-30">
+
+          <Button 
+
+            variant="outline" 
+
+            size="sm" 
+
+            asChild 
+
+            className="border-[#33FF33] bg-black/80 text-[#33FF33] hover:bg-[#33FF33]/20 font-mono retro-text mb-4 transition-all duration-300 hover:shadow-[0_0_8px_rgba(51,255,51,0.5)] hover:scale-105"
+
+          >
+
+            <Link href="/">
+
+              <svg className="w-4 h-4 mr-2 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+
+              </svg>
+
+              [ ANA SAYFA ]
+
+            </Link>
+
+          </Button>
+
+        </div>
 
         <MatrixCardControl className="w-full mb-16 p-6">
 
@@ -178,7 +206,7 @@ export default function LoginPage() {
 
                 type="submit"
 
-                className="w-full h-12 bg-transparent hover:bg-[#ff9900]/10 relative overflow-hidden group border border-[#ff9900] text-[#ff9900] font-mono matrix-text text-lg retro-text-orange"
+                className="w-full h-12 bg-transparent hover:bg-[#ff9900]/10 relative overflow-hidden group border border-[#ff9900] text-[#ff9900] font-mono matrix-text text-lg retro-text-orange transition-all duration-300 hover:shadow-[0_0_12px_rgba(255,153,0,0.6)] hover:border-[#ff9900]/80"
 
                 disabled={isSubmitting}
 
@@ -186,7 +214,7 @@ export default function LoginPage() {
 
                 <span className="relative z-10">{isSubmitting ? "GİRİŞ YAPILIYOR..." : "GİRİŞ YAP"}</span>
 
-                <span className="absolute inset-0 w-0 bg-[#ff9900]/20 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute inset-0 w-0 bg-[#ff9900]/20 transition-all duration-500 group-hover:w-full"></span>
 
               </Button>
 
