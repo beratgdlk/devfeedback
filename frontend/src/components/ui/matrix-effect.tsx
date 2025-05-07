@@ -20,7 +20,7 @@ const createMatrixColumn = (characters: string, length: number) => {
 
   }
 
-  
+    
 
   return column;
 

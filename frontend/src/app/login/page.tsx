@@ -18,6 +18,10 @@ import Link from "next/link";
 
 import { MatrixRain, MatrixMarquee, MatrixMarqueeTop, MatrixLoading, MatrixCardControl } from "@/components/ui/matrix-effect";
 
+import { useAuthStore } from "@/lib/auth-store";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 const loginSchema = z.object({
 
   email: z.string().email("Geçerli bir email adresi giriniz"),
@@ -29,6 +33,10 @@ const loginSchema = z.object({
 type LoginForm = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
+
+  const router = useRouter();
+  const { login, isLoading, error, clearError } = useAuthStore();
+  const [loginSuccess, setLoginSuccess] = useState(false);
 
   const {
 
@@ -44,9 +52,21 @@ export default function LoginPage() {
 
   });
 
-  const onSubmit = (data: LoginForm) => {
+  const onSubmit = async (data: LoginForm) => {
 
-    console.log("Success", data);
+    try {
+
+      clearError();
+      await login(data.email, data.password);
+      setLoginSuccess(true);
+      
+      // Başarılı girişten sonra ana sayfaya yönlendir
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
+    } catch (error) {
+      console.error("Giriş hatası:", error);
+    }
 
   };
 
@@ -198,6 +218,18 @@ export default function LoginPage() {
 
               </div>
 
+              {error && (
+                <div className="p-3 bg-red-500/20 border border-red-500 text-red-500 rounded-md">
+                  <p className="text-sm font-mono">{error}</p>
+                </div>
+              )}
+              
+              {loginSuccess && (
+                <div className="p-3 bg-green-500/20 border border-green-500 text-green-500 rounded-md">
+                  <p className="text-sm font-mono">Giriş başarılı! Yönlendiriliyorsunuz...</p>
+                </div>
+              )}
+
             </CardContent>
 
             <CardFooter className="flex flex-col gap-4 mt-4">
@@ -206,15 +238,23 @@ export default function LoginPage() {
 
                 type="submit"
 
-                className="w-full h-12 bg-transparent hover:bg-[#ff9900]/10 relative overflow-hidden group border border-[#ff9900] text-[#ff9900] font-mono matrix-text text-lg retro-text-orange transition-all duration-300 hover:shadow-[0_0_12px_rgba(255,153,0,0.6)] hover:border-[#ff9900]/80"
+                disabled={isSubmitting || isLoading}
 
-                disabled={isSubmitting}
+                className="w-full h-12 bg-[#ff9900] text-white hover:bg-[#ff9900]/90 font-mono retro-text-orange tracking-widest text-lg transition-all duration-300 hover:shadow-[0_0_8px_rgba(255,153,0,0.5)]"
 
               >
 
-                <span className="relative z-10">{isSubmitting ? "GİRİŞ YAPILIYOR..." : "GİRİŞ YAP"}</span>
-
-                <span className="absolute inset-0 w-0 bg-[#ff9900]/20 transition-all duration-500 group-hover:w-full"></span>
+                {isSubmitting || isLoading ? (
+                  <span className="flex items-center">
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    GİRİŞ YAPILIYOR...
+                  </span>
+                ) : (
+                  "GİRİŞ YAP"
+                )}
 
               </Button>
 

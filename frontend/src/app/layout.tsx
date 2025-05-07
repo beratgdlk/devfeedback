@@ -1,35 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { NavBar } from "@/components/NavBar";
 
 export const metadata: Metadata = {
-  title: "DevFeedback",
-  description: "Geliştiriciler için Geri Bildirim Platformu",
-  keywords: ["feedback", "developer", "platform", "matrix"],
-  icons: {
-    icon: "/favicon.ico",
-  },
+  title: "DevFeedback - Yazılımcıların Bilgi Paylaşım Platformu",
+  description: "Yazılımcılar için bilgi paylaşım ve geri bildirim platformu",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="tr" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
-        {children}
+    <html lang="tr">
+      <body className="bg-black text-white min-h-screen">
+        <NavBar />
+        <div className="pt-36">
+          {children}
+        </div>
       </body>
     </html>
   );

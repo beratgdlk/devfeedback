@@ -618,7 +618,7 @@ html {
   padding: 0.5rem 0;
   overflow: hidden;
   border-bottom: 1px solid #33FF33;
-  z-index: 50;
+  z-index: 45;
 }
 
 .text-shadow-green {
