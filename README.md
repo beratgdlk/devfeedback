@@ -6,6 +6,10 @@ Matrix temalı, geliştiriciler arası bilgi paylaşımı ve geri bildirim platf
 
 DevFeedback, geliştiricilerin teknik sorularını paylaşabileceği, deneyimli geliştiricilerden geri bildirim alabileceği ve yazılım geliştirme topluluğuna katkıda bulunabileceği bir platformdur. Retro Matrix temasıyla nostaljik bir kullanıcı deneyimi sunar.
 
+## Güncel Durum
+
+Platform aktif geliştirme aşamasındadır. Front-end ve back-end bileşenleri paralel olarak geliştirilmektedir. Tüm katkılar açık ve takım üyeleri tarafından değerlendirilmektedir.
+
 ## Teknoloji Yığını
 
 ### Frontend
@@ -16,7 +20,7 @@ DevFeedback, geliştiricilerin teknik sorularını paylaşabileceği, deneyimli 
 - **Form Validasyonu**: React Hook Form + Zod
 - **UI Kütüphanesi**: ShadCN UI
 
-### Backend (Planlanan)
+### Backend 
 - **Framework**: Node.js (Express/NestJS)
 - **Veritabanı**: MongoDB/PostgreSQL
 - **Kimlik Doğrulama**: JWT
@@ -34,7 +38,7 @@ npm run dev
 
 Frontend uygulaması `http://localhost:3002` adresinde çalışacaktır.
 
-### Backend Geliştirme (Gelecekte)
+### Backend Geliştirme
 
 ```bash
 cd backend
@@ -63,7 +67,7 @@ devfeedback/
 │   │   ├── components/     # UI bileşenleri
 │   │   └── lib/            # Yardımcı fonksiyonlar ve hooks
 │   └── public/             # Statik dosyalar
-├── backend/                # Backend API (planlanan)
+├── backend/                # Backend API
 │   ├── src/                
 │   │   ├── controllers/    # API controller'ları
 │   │   ├── models/         # Veritabanı modelleri
@@ -93,6 +97,29 @@ Backend geliştiricileri için, [API.md](API.md) dosyasında tanımlanan endpoin
 3. Yorum sistemi
 4. Beğeni sistemi
 5. Kategori/Etiket yönetimi
+
+## Ortak Çalışma Prensipleri
+
+### Git İş Akışı
+- **Branch Stratejisi**: Feature branch → Pull Request → Code Review → Merge
+- **Branch İsimlendirme**: `feature/özellik-adı`, `bugfix/hata-açıklaması`, `hotfix/acil-düzeltme`
+- **Commit Mesajları**: Anlamlı ve açıklayıcı olmalı (örn. "Kullanıcı giriş formu eklendi")
+
+### Kod Standartları
+- TypeScript için ESLint ve Prettier yapılandırması takip edilmelidir
+- Her yeni özellik için birim testleri yazılmalıdır
+- Responsive tasarım prensiplerine uyulmalıdır
+
+### Geliştirme Süreci
+1. İş öğeleri GitHub Issues üzerinden takip edilir
+2. Kodlama öncesi tasarım ve yaklaşım ekip ile paylaşılır
+3. Pull Request'ler en az bir ekip üyesi tarafından incelenir
+4. CI/CD pipeline testleri geçilmelidir
+
+## API Entegrasyonu
+- Frontend ve backend arasındaki iletişim API.md'de tanımlanan standartlara göre yapılır
+- API, REST prensiplerine uygun olarak tasarlanmıştır
+- Tüm istekler JWT token ile yetkilendirilir
 
 ## Katkıda Bulunma
 
