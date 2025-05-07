@@ -15,27 +15,27 @@ const AnimatedLogo = React.memo(() => {
       <div className="matrix-cube">
         {/* Ön yüz */}
         <div className="matrix-cube-face matrix-cube-front border-2 border-[#33FF33] flex items-center justify-center">
-          <span className="text-[#33FF33] text-xl font-mono retro-text">DF</span>
+          <span className="text-[#33FF33] text-xl font-mono retro-text">OJS</span>
         </div>
         {/* Arka yüz */}
         <div className="matrix-cube-face matrix-cube-back border-2 border-[#33FF33] flex items-center justify-center">
-          <span className="text-[#33FF33] text-xl font-mono retro-text">FD</span>
+          <span className="text-[#33FF33] text-xl font-mono retro-text">OJS</span>
         </div>
         {/* Üst yüz */}
         <div className="matrix-cube-face matrix-cube-top border-2 border-[#33FF33] flex items-center justify-center">
-          <span className="text-[#9900FF] text-xl font-mono retro-text">SYS</span>
+          <span className="text-[#9900FF] text-xl font-mono retro-text">OJS</span>
         </div>
         {/* Alt yüz */}
         <div className="matrix-cube-face matrix-cube-bottom border-2 border-[#33FF33] flex items-center justify-center">
-          <span className="text-[#9900FF] text-xl font-mono retro-text">SYS</span>
+          <span className="text-[#9900FF] text-xl font-mono retro-text">OJS</span>
         </div>
         {/* Sol yüz */}
         <div className="matrix-cube-face matrix-cube-left border-2 border-[#33FF33] flex items-center justify-center">
-          <span className="text-[#33FF33] text-xl font-mono retro-text">D</span>
+          <span className="text-[#33FF33] text-xl font-mono retro-text">OJS</span>
         </div>
         {/* Sağ yüz */}
         <div className="matrix-cube-face matrix-cube-right border-2 border-[#33FF33] flex items-center justify-center">
-          <span className="text-[#33FF33] text-xl font-mono retro-text">F</span>
+          <span className="text-[#33FF33] text-xl font-mono retro-text">OJS</span>
         </div>
       </div>
 
