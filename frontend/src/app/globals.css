@@ -47,7 +47,6 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* Light Mode Theme - Hidden By Default */
 .light {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -83,7 +82,6 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-/* Dark Mode Theme - Applied By Default */
 :root {
   --radius: 0.625rem;
   --background: oklch(0.1 0 0);
@@ -92,7 +90,7 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.15 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.6 0.243 264.376); /* Mor-mavi */
+  --primary: oklch(0.6 0.243 264.376); 
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.2 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -118,8 +116,8 @@
   --sidebar-border: oklch(0.2 0 0);
   --sidebar-ring: oklch(0.6 0.243 264.376);
   
-  /* Retro renkler */
-  --retro-neon-pink: #9900FF; /* Siber mor tonu */
+  
+  --retro-neon-pink: #9900FF; 
   --retro-neon-blue: #00ffff;
   --retro-neon-green: #00ff00;
   --retro-purple: #7700cc;
@@ -136,12 +134,10 @@
   }
 }
 
-/* Özel Tema Geçişleri */
 html {
   color-scheme: dark;
 }
 
-/* Özel Animasyonlar */
 .animate-pulse-slow {
   animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
@@ -155,7 +151,6 @@ html {
   }
 }
 
-/* Marquee animasyonu */
 @keyframes marquee {
   0% {
     transform: translateX(0);
@@ -169,7 +164,6 @@ html {
   animation: marquee 20s linear infinite;
 }
 
-/* Yeni Retro Animasyonlar */
 .retro-text {
   text-shadow: 
     0 0 5px var(--retro-neon-blue),
@@ -252,7 +246,6 @@ html {
   background-size: 20px 20px;
 }
 
-/* Scanline efekti */
 .retro-scanlines {
   position: relative;
 }
@@ -276,7 +269,6 @@ html {
   pointer-events: none;
 }
 
-/* CRT effect */
 .retro-crt {
   position: relative;
   overflow: hidden;
@@ -318,7 +310,6 @@ html {
   }
 }
 
-/* Blink animasyonu */
 .retro-blink {
   animation: blink 1s infinite;
 }
@@ -332,7 +323,6 @@ html {
   }
 }
 
-/* Glitch efekti */
 .retro-glitch {
   position: relative;
 }
@@ -362,7 +352,6 @@ html {
   }
 }
 
-/* Scroll Barlar İçin Özelleştirme */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -382,7 +371,6 @@ html {
   background: var(--ring);
 }
 
-/* Retro terminal styling */
 .retro-terminal {
   background-color: #0D0D0D;
   color: #33FF33;
@@ -398,17 +386,14 @@ html {
   margin-right: 0.5rem;
 }
 
-/* Synthwave background */
 .synthwave-bg {
   background: linear-gradient(to bottom, #000035, #120041, #250042, #3d0051, #6b0069);
 }
 
-/* Animasyon durdurma/duraklatma */
 .animate-paused * {
   animation-play-state: paused !important;
 }
 
-/* Matrix Animasyonları */
 .matrix-rain {
   position: fixed;
   top: 0;
@@ -418,10 +403,10 @@ html {
   z-index: 1;
   pointer-events: none;
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.05); /* Daha da şeffaf arkaplan */
+  background-color: rgba(0, 0, 0, 0.05); 
   will-change: opacity;
-  backface-visibility: hidden; /* GPU hızlandırma için */
-  transform: translateZ(0); /* GPU hızlandırma için */
+  backface-visibility: hidden; 
+  transform: translateZ(0); 
 }
 
 .matrix-drop {
@@ -434,8 +419,8 @@ html {
   transform-origin: center;
   z-index: 1;
   will-change: transform, opacity;
-  backface-visibility: hidden; /* GPU hızlandırma için */
-  transform: translateZ(0); /* GPU hızlandırma için */
+  backface-visibility: hidden; 
+  transform: translateZ(0); 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -444,7 +429,6 @@ html {
   white-space: nowrap;
 }
 
-/* Matrix Kart Stilleri */
 .matrix-card {
   position: relative;
   overflow: hidden;
@@ -455,7 +439,7 @@ html {
   box-shadow: 0 0 15px rgba(51, 255, 51, 0.2);
   transition: all 0.3s ease;
   will-change: transform, box-shadow;
-  transform: translateZ(0); /* GPU hızlandırma için */
+  transform: translateZ(0); 
 }
 
 .matrix-card:hover {
@@ -473,7 +457,6 @@ html {
   z-index: 10;
 }
 
-/* Karakterlerin düşme hızı - GPU hızlandırmalı */
 @keyframes matrix-rain-fall {
   0% {
     transform: translateY(-150px) scale(1);
@@ -500,7 +483,6 @@ html {
   }
 }
 
-/* İlk karakter için daha parlak animasyon */
 @keyframes head-flicker {
   0%, 100% {
     opacity: 1;
@@ -514,7 +496,6 @@ html {
   }
 }
 
-/* Tarayıcı optimizasyonları */
 @media (prefers-reduced-motion) {
   .matrix-drop {
     animation-duration: 5s !important;
@@ -538,7 +519,6 @@ html {
   }
 }
 
-/* Düşük güçlü cihazlar için performans optimizasyonları */
 @media (max-width: 768px) {
   .matrix-drop {
     text-shadow: 0 0 5px #33FF33;
@@ -556,7 +536,6 @@ html {
   }
 }
 
-/* Matrix Text Effect */
 .matrix-text {
   position: relative;
   font-family: monospace;
@@ -590,7 +569,6 @@ html {
   }
 }
 
-/* Matrix Loading Bar */
 .matrix-loading {
   width: 100%;
   height: 4px;
@@ -619,7 +597,6 @@ html {
   }
 }
 
-/* Retro Marquee Band - Fullwidth at bottom */
 .retro-band-fullwidth {
   position: fixed;
   bottom: 0;
@@ -632,7 +609,6 @@ html {
   z-index: 50;
 }
 
-/* Retro Marquee Band - Fullwidth at top */
 .retro-band-topwidth {
   position: fixed;
   top: 0;
@@ -645,7 +621,6 @@ html {
   z-index: 50;
 }
 
-/* Matrix Metin Efektleri */
 .text-shadow-green {
   text-shadow: 0 0 5px #33FF33, 0 0 10px #33FF33, 0 0 15px #33FF33;
 }

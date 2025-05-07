@@ -1,24 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DevFeedback - Geliştiriciler için Geri Bildirim Platformu
 
-## Getting Started
+Matrix temalı, modern ve performanslı bir geliştiriciler arası soru-cevap ve geri bildirim platformu.
 
-First, run the development server:
+## Teknolojiler
+
+- **Frontend**: Next.js 15.3.2, React 19, TypeScript, Tailwind CSS
+- **State Management**: Zustand
+- **Form Yönetimi**: React Hook Form, Zod
+- **Animasyonlar**: CSS Animations, Framer Motion
+- **UI Kütüphanesi**: ShadCN UI
+
+## Başlangıç
+
+Geliştirme sunucusunu başlatmak için:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Bu komut, uygulamayı 3002 portunda ve tüm ağ arayüzlerinde (`0.0.0.0`) başlatır. Aşağıdaki URL'lerden erişilebilir:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [http://localhost:3002](http://localhost:3002)
+- http://[bilgisayarınızın-ip-adresi]:3002
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Mimari Yapı
+
+Proje, modern bir frontend yaklaşımıyla geliştirilmiştir:
+
+- **App Router**: Next.js 13+ app router mimarisi
+- **Sunucu Bileşenleri**: Performans için sunucu taraflı render edilmiş bileşenler
+- **İstemci Bileşenleri**: Etkileşimli bileşenler için `"use client"` direktifi
+- **Hydration Optimization**: Sunucu ve istemci eşleşmesi için optimizasyonlar
+
+## Özellikler
+
+- Matrix temalı kullanıcı arayüzü
+- Giriş/kayıt sayfaları
+- Ana sayfa soru listesi
+- Kategorilere göre filtreleme
+- Gönderi detay sayfaları
+- Tema kontrolü (Matrix animasyonu durdurma/başlatma)
+
+## Backend İletişimi (Gelecek Entegrasyon)
+
+Backend ile iletişim için aşağıdaki API istekleri planlanmıştır:
+
+- Kullanıcı yönetimi (kayıt, giriş, oturum işlemleri)
+- Gönderi listeleme, oluşturma, detay görüntüleme
+- Yorum sistemi
+- Kategori yönetimi
+
+## Stil ve Tasarım
+
+Uygulama, aşağıdaki temel tasarım prensipleriyle geliştirilmiştir:
+
+- Matrix teması (yeşil, siyah ana renkler)
+- Retro terminal görünümü
+- Responsive tasarım (mobil, tablet, masaüstü)
+- Animasyonlu UI bileşenleri
+- Karanlık mod odaklı
+
+## Performans Optimizasyonları
+
+- Matrix animasyonları için GPU hızlandırma
+- İntersection Observer ile görünür olmayan bileşenlerin durdurulması
+- Sunucu bileşenleri ile daha hızlı ilk yükleme
+- `will-change` ve diğer CSS optimizasyonları
+
+## Backend Geliştirme Rehberi
+
+Backend geliştiricileri için API yapısını [API.md](../API.md) dosyasında bulabilirsiniz.
 
 ## Learn More
 

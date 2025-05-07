@@ -6,19 +6,18 @@ import Link from "next/link";
 import { MatrixMarquee, MatrixMarqueeTop, MatrixRain, MatrixCard, MatrixCardControl } from "@/components/ui/matrix-effect";
 import { useState } from "react";
 
-// Coder Logo
 const AnimatedLogo = () => {
   return (
     <div className="w-24 h-24 bg-black border-2 border-[#33FF33] rounded-full mx-auto mb-6 flex items-center justify-center relative overflow-hidden retro-border-green">
-      {/* Arka plan parlama animasyonu */}
+      {}
       <div className="absolute inset-0 bg-[#33FF33]/5 rounded-full animate-pulse" style={{ animationDuration: '3s' }}></div>
       
-      {/* Çember dalga animasyonu */}
+      {}
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="w-full h-full border-2 border-[#33FF33]/20 rounded-full transform scale-50 animate-ping" style={{ animationDuration: '3s' }}></div>
       </div>
       
-      {/* Arka planda matrix tarzı animasyon */}
+      {}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-4 left-4 text-[8px] font-mono text-[#33FF33] animate-pulse" style={{ animationDuration: '1.5s' }}>01001</div>
         <div className="absolute top-8 left-8 text-[8px] font-mono text-[#33FF33] animate-pulse" style={{ animationDuration: '2s' }}>10110</div>
@@ -26,7 +25,7 @@ const AnimatedLogo = () => {
         <div className="absolute bottom-8 right-8 text-[8px] font-mono text-[#33FF33] animate-pulse" style={{ animationDuration: '2.2s' }}>10010</div>
       </div>
       
-      {/* Ana logo */}
+      {}
       <div className="font-mono text-4xl font-bold flex items-center z-10 relative">
         <span className="text-[#33FF33] relative animate-pulse" style={{ animationDuration: '1.8s' }}>
           &lt;
@@ -42,13 +41,12 @@ const AnimatedLogo = () => {
         </span>
       </div>
       
-      {/* Parlama animasyonu */}
+      {}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#33FF33]/20 to-transparent animate-pulse-slow -skew-x-12" style={{ animationDuration: '4s' }}></div>
     </div>
   );
 };
 
-// Auth buttons komponenti
 const AuthButtons = () => (
   <div className="flex justify-center space-x-4 my-6">
     <Link href="/login">
@@ -80,7 +78,6 @@ const AuthButtons = () => (
   </div>
 );
 
-// Teknoloji ikonları
 const TechIcons = ({ onSelectCategory, activeCategory, isVisible = true }: { onSelectCategory: (category: string) => void, activeCategory: string | null, isVisible?: boolean }) => {
   const technologies = [
     { id: 'react', name: 'React', icon: <><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="4" /></>, color: 'bg-blue-900/30' },
@@ -133,7 +130,6 @@ const TechIcons = ({ onSelectCategory, activeCategory, isVisible = true }: { onS
   );
 };
 
-// Örnek veri
 const posts = [
   {
     id: 1,
@@ -258,7 +254,6 @@ const posts = [
   }
 ];
 
-// Retro tarzda Dialog komponenti
 const RetroDialog = ({ isOpen, onClose, title, children }: { isOpen: boolean, onClose: () => void, title: string, children: React.ReactNode }) => {
   if (!isOpen) return null;
   
@@ -288,30 +283,117 @@ const RetroDialog = ({ isOpen, onClose, title, children }: { isOpen: boolean, on
   );
 };
 
-// Yeni gönderi formu
 const NewPostForm = () => {
   const [category, setCategory] = useState("");
   const [customTag, setCustomTag] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
-  // Özel etiket değiştiğinde "Other" seçeneğini otomatik seç
   const handleCustomTagChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setCustomTag(value);
     
-    // Özel etiket alanına bir şey yazıldığında "Other" kategorisini seç
     if (value.trim() !== "") {
       setCategory("other");
     }
   };
   
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Form validasyonu
+    if (!title.trim()) {
+      alert("Lütfen bir başlık giriniz");
+      setIsSubmitting(false);
+      return;
+    }
+    
+    if (!category) {
+      alert("Lütfen bir kategori seçiniz");
+      setIsSubmitting(false);
+      return;
+    }
+    
+    if (category === "other" && !customTag.trim()) {
+      alert("Diğer kategorisi için özel etiket giriniz");
+      setIsSubmitting(false);
+      return;
+    }
+    
+    if (!content.trim()) {
+      alert("Lütfen içerik giriniz");
+      setIsSubmitting(false);
+      return;
+    }
+    
+    // Yeni gönderi nesnesi oluştur (backend bağlandığında API'ye gönderilecek)
+    const displayTag = category === "other" ? customTag : 
+                     category === "react" ? "React" : 
+                     category === "node" ? "Node.js" :
+                     category === "vue" ? "Vue" :
+                     category === "angular" ? "Angular" :
+                     category === "typescript" ? "TypeScript" :
+                     category === "javascript" ? "JavaScript" :
+                     category === "frontend" ? "Frontend" :
+                     category === "backend" ? "Backend" :
+                     category === "nestjs" ? "NestJS" :
+                     category === "elysia" ? "Elysia.js" : category;
+    
+    const bgColor = 
+      category === "react" ? "bg-blue-900/30" :
+      category === "node" ? "bg-green-900/30" :
+      category === "vue" ? "bg-emerald-900/30" :
+      category === "angular" ? "bg-red-900/30" :
+      category === "typescript" ? "bg-blue-900/30" :
+      category === "javascript" ? "bg-yellow-900/30" :
+      category === "frontend" ? "bg-pink-900/30" :
+      category === "backend" ? "bg-indigo-900/30" :
+      category === "nestjs" ? "bg-red-900/30" :
+      category === "elysia" ? "bg-purple-900/30" :
+      "bg-gray-900/30";
+    
+    const newPost = {
+      id: String(Date.now()), // Geçici ID (backend entegrasyonunda gerçek ID kullanılacak)
+      title,
+      description: content.substring(0, 200) + (content.length > 200 ? "..." : ""),
+      content: `<p>${content.replace(/\n/g, "</p><p>")}</p>`,
+      author: "Demo Kullanıcı", // Kullanıcı girişi yapıldığında gerçek kullanıcı bilgisi kullanılacak
+      likes: 0,
+      comments: [],
+      createdAt: "Şimdi",
+      tag: displayTag,
+      color: bgColor
+    };
+    
+    console.log("Yeni gönderi oluşturuldu:", newPost);
+    
+    // Burada normalde API çağrısı yapılacak
+    // Backend entegrasyonu yapıldığında bu kısım değişecek
+    
+    // Form sıfırla
+    setTitle("");
+    setContent("");
+    setCategory("");
+    setCustomTag("");
+    setIsSubmitting(false);
+    
+    // Demo amaçlı: Yeni gönderi sayfasına yönlendir
+    window.location.href = `/posts/${newPost.id}`;
+  };
+  
   return (
-    <form className="space-y-4">
+    <form className="space-y-4" onSubmit={handleSubmit}>
       <div className="space-y-2">
         <label className="block text-sm font-medium text-[#33FF33] font-mono matrix-text">BAŞLIK</label>
         <input 
           type="text" 
           className="w-full h-11 bg-black/80 border-[#33FF33]/60 text-white placeholder:text-[#33FF33]/60 focus:border-[#33FF33] focus:ring-[#33FF33]/50 font-mono rounded p-2"
-          placeholder="Gönderi başlığını giriniz" 
+          placeholder="Gönderi başlığını giriniz"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
         />
       </div>
       
@@ -321,6 +403,7 @@ const NewPostForm = () => {
           className="w-full h-11 bg-black/80 border-[#33FF33]/60 text-white focus:border-[#33FF33] focus:ring-[#33FF33]/50 font-mono rounded p-2"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
+          required
         >
           <option value="">Etiket seçiniz</option>
           <option value="react">React</option>
@@ -345,6 +428,8 @@ const NewPostForm = () => {
           placeholder="Özel etiket girebilirsiniz"
           value={customTag}
           onChange={handleCustomTagChange}
+          disabled={category !== "other"}
+          required={category === "other"}
         />
         {category === "other" && customTag.trim() === "" && (
           <p className="text-[#9900FF] text-xs font-mono mt-1">Diğer seçeneği için özel etiket giriniz.</p>
@@ -356,6 +441,9 @@ const NewPostForm = () => {
         <textarea 
           className="w-full h-40 bg-black/80 border-[#33FF33]/60 text-white placeholder:text-[#33FF33]/60 focus:border-[#33FF33] focus:ring-[#33FF33]/50 font-mono rounded p-2"
           placeholder="Gönderinizin içeriğini buraya yazınız..." 
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          required
         />
       </div>
       
@@ -363,26 +451,27 @@ const NewPostForm = () => {
         <Button 
           type="button"
           className="bg-transparent hover:bg-[#9900FF]/10 relative overflow-hidden group border border-[#9900FF] text-[#9900FF] font-mono retro-text-pink"
+          onClick={() => window.location.href = '/'}
         >
           İPTAL
         </Button>
         <Button 
           type="submit"
           className="bg-transparent hover:bg-[#33FF33]/10 relative overflow-hidden group border border-[#33FF33] text-[#33FF33] font-mono matrix-text"
+          disabled={isSubmitting}
         >
-          GÖNDER
+          {isSubmitting ? "GÖNDERİLİYOR..." : "GÖNDER"}
         </Button>
       </div>
     </form>
   );
 };
 
-// Giriş yapılmadı uyarısı
 const LoginRequiredMessage = () => (
   <div className="text-center p-4">
     <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-      <svg className="w-12 h-12 text-[#9900FF]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      <svg className="w-12 h-12 text-[#9900FF]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
       </svg>
     </div>
     <h3 className="text-xl font-bold text-[#9900FF] mb-2 retro-text-pink">Giriş Yapmanız Gerekiyor</h3>
@@ -403,7 +492,7 @@ const LoginRequiredMessage = () => (
 );
 
 export default function Home() {
-  // Demo amaçlı, normalde bir auth context veya API çağrısı ile kontrol edilir
+  
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
@@ -417,26 +506,26 @@ export default function Home() {
     setIsDialogOpen(false);
   };
   
-  // Demo amaçlı oturum açma/kapatma
+  
   const toggleLogin = () => {
     setIsLoggedIn(prevState => !prevState);
   };
 
-  // Teknolojiler görünürlüğünü değiştir
+  
   const toggleTechnologies = () => {
     setShowTechnologies(prev => !prev);
   };
 
-  // Kategori filtreleme
+  
   const filterByCategory = (category: string) => {
     if (activeCategory === category) {
-      setActiveCategory(null); // Aynı kategoriye tekrar tıklanırsa filtrelemeyi kaldır
+      setActiveCategory(null); 
     } else {
       setActiveCategory(category);
     }
   };
   
-  // Filtrelenmiş gönderiler
+  
   const filteredPosts = activeCategory 
     ? posts.filter(post => post.tag.toLowerCase() === activeCategory.toLowerCase())
     : posts;
@@ -446,12 +535,12 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-black py-12 px-4 relative overflow-hidden">
-      {/* Matrix Yağmur Animasyonu - Sadece arkaplan için */}
+      {}
       <MatrixRain />
       
       <MatrixMarqueeTop text={marqueeTopText} />
       
-      {/* Yeni Gönderi Dialog */}
+      {}
       <RetroDialog 
         isOpen={isDialogOpen} 
         onClose={closeDialog} 
@@ -461,10 +550,10 @@ export default function Home() {
       </RetroDialog>
       
       <div className="max-w-4xl mx-auto relative mt-8 mb-20 z-20">
-        {/* Ana içeriği içeren tek bir kart yapısı */}
+        {}
         <MatrixCardControl className="mb-12">
           <div className="p-8">
-            {/* Logo ve Başlık */}
+            {}
             <div className="mb-8 text-center">
               <AnimatedLogo />
               
@@ -475,16 +564,16 @@ export default function Home() {
                 Sorularınızı paylaşın, deneyimli geliştiricilerden geri bildirimler alın
               </p>
               
-              {/* Matrix efekti durumu */}
+              {}
               <div className="mt-4 text-xs text-[#33FF33] font-mono animate-pulse">
                 [SİSTEM DURUMU: AKTİF] - SAĞ ÜST BUTONU KULLANARAK MATRIX ANİMASYONUNU KONTROL EDEBİLİRSİNİZ
               </div>
             </div>
 
-            {/* Giriş/Kayıt Butonları */}
+            {}
             <AuthButtons />
 
-            {/* Teknolojiler Butonu */}
+            {}
             <div className="flex justify-center mt-6 mb-4">
               <Button 
                 className="bg-black hover:bg-[#ff9900]/10 relative overflow-hidden border-2 border-[#ff9900] text-[#ff9900] font-mono px-5 py-2 h-auto text-base retro-text-orange shadow-[0_0_10px_rgba(255,153,0,0.5)]"
@@ -494,10 +583,10 @@ export default function Home() {
               </Button>
             </div>
 
-            {/* Teknolojiler Bölümü - Gizlenebilir */}
+            {}
             <TechIcons onSelectCategory={filterByCategory} activeCategory={activeCategory} isVisible={showTechnologies} />
 
-            {/* Yeni Gönderi Oluştur Butonu */}
+            {}
             <div className="flex justify-center mt-6">
               <div className="retro-pixel-container">
                 <Button 
@@ -515,7 +604,7 @@ export default function Home() {
           </div>
         </MatrixCardControl>
 
-        {/* Gönderiler */}
+        {}
         <div className="space-y-6 mt-10">
           <div className="flex items-center justify-between mb-6">
             <div className="h-[1px] flex-grow bg-gradient-to-r from-transparent via-[#33FF33]/50 to-transparent"></div>
@@ -586,10 +675,10 @@ export default function Home() {
         </div>
         
         <div className="text-center mt-12 text-sm text-[#33FF33] animate-pulse-slow font-mono" style={{ animationDelay: '800ms' }}>
-          © 2024 DEVFEEDBACK.SYS // RUN v1.0.1 // ALL RIGHTS RESERVED
+          © 2024 DEVFEEDBACK.SYS 
         </div>
         
-        {/* Demo için oturum butonları */}
+        {}
         <div className="fixed bottom-20 right-6 flex flex-col gap-2">
           <Button 
             className="bg-black hover:bg-[#33FF33]/10 border border-[#33FF33] text-[#33FF33] text-xs px-2 py-1 h-auto font-mono"
